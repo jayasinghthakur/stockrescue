@@ -8,6 +8,7 @@ until redis-cli ping >/dev/null 2>&1; do
 done
 echo "FalkorDB is up."
 
+# HF Spaces uses port 7860; Render injects $PORT.
 exec streamlit run app.py \
-  --server.port=7860 --server.address=0.0.0.0 \
+  --server.port="${PORT:-7860}" --server.address=0.0.0.0 \
   --server.headless=true --browser.gatherUsageStats=false
